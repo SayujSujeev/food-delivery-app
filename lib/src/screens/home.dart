@@ -170,7 +170,7 @@ class _HomeState extends State<Home> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      
+
                       Padding(
                         padding: const EdgeInsets.fromLTRB(12, 8, 8, 8),
                         child: RichText(
