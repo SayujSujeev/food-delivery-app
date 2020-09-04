@@ -205,7 +205,8 @@ class _HomeState extends State<Home> {
                                     fontWeight: FontWeight.w300,
                                     fontSize: 22,
                                     color: white))
-                          ], style: TextStyle(color: black)),
+                          ],
+                              style: TextStyle(color: black)),
                         ),
                       )
                     ],
