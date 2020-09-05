@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_order_app/src/models/category.dart';
 import 'package:food_order_app/src/widgets/custom_text.dart';
 
-import '../commons.dart';
+import '../helpers/style.dart';
 
 List<Category> categoriesList = [
   Category(name: "Salad", image:  "salad.png"),

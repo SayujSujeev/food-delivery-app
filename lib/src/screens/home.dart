@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:food_order_app/src/commons.dart';
+import 'package:food_order_app/src/helpers/style.dart';
 import 'package:food_order_app/src/widgets/bottom_navigation_icons.dart';
 import 'package:food_order_app/src/widgets/categories.dart';
 import 'package:food_order_app/src/widgets/custom_text.dart';
