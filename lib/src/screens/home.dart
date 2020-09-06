@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:food_order_app/src/helpers/screen_navigation.dart';
 import 'package:food_order_app/src/helpers/style.dart';
+import 'package:food_order_app/src/screens/bag.dart';
 import 'package:food_order_app/src/widgets/bottom_navigation_icons.dart';
 import 'package:food_order_app/src/widgets/categories.dart';
 import 'package:food_order_app/src/widgets/custom_text.dart';
@@ -230,6 +232,9 @@ class _HomeState extends State<Home> {
               name: "Home",
             ),
             BottomNavIcon(
+              onTap: (){
+                changeScreen(context, ShopingBag());
+              },
               image: "shopping-bag.png",
               name: "Cart",
             ),

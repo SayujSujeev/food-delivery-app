@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "615216731677",
+    "firebase_url": "https://foodapp-a544b.firebaseio.com",
+    "project_id": "foodapp-a544b",
+    "storage_bucket": "foodapp-a544b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:615216731677:android:2b60592f4a7b6448a758f4",
+        "android_client_info": {
+          "package_name": "com.sayuj.food_order_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "615216731677-8k9j0mrad411lh0027q8l71q1sabvgpk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sayuj.food_order_app",
+            "certificate_hash": "22c865f189370abc35ce97693e462e108955c299"
+          }
+        },
+        {
+          "client_id": "615216731677-2dem9130vu5ehmf6189cc706l93f5u9n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTcjmWVOOXg04Fi2_nk4RER7FL-388trM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "615216731677-2dem9130vu5ehmf6189cc706l93f5u9n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
