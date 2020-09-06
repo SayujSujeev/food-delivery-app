@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:food_order_app/src/helpers/screen_navigation.dart';
 import 'package:food_order_app/src/helpers/style.dart';
 import 'package:food_order_app/src/screens/bag.dart';
@@ -18,42 +19,33 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("FoodApp"),
+        actions: <Widget>[
+          Stack(
+            children: <Widget>[
+              IconButton(
+                  icon: Icon(Icons.notifications_none), onPressed: () {}),
+              Positioned(
+                top: 12.0,
+                right: 12.0,
+                child: Container(
+                  height: 10.0,
+                  width: 10.0,
+                  decoration: BoxDecoration(
+                      color: red,
+                      borderRadius: BorderRadius.circular(20.0)),
+                ),
+              )
+            ],
+          )
+        ],
+      ),
       backgroundColor: white,
       body: SafeArea(
         child: ListView(
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CustomText(
-                    text: "What would you like to eat?",
-                    size: 18.0,
-                  ),
-                ),
-                Stack(
-                  children: <Widget>[
-                    IconButton(
-                        icon: Icon(Icons.notifications_none), onPressed: () {}),
-                    Positioned(
-                      top: 12.0,
-                      right: 12.0,
-                      child: Container(
-                        height: 10.0,
-                        width: 10.0,
-                        decoration: BoxDecoration(
-                            color: red,
-                            borderRadius: BorderRadius.circular(20.0)),
-                      ),
-                    )
-                  ],
-                )
-              ],
-            ),
-            SizedBox(
-              height: 5.0,
-            ),
+
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
