@@ -11,6 +11,7 @@ class ProductModel{
   static const RESTAURANT = "restaurant";
   static const CATEGORY = "category";
   static const FEATURED = "featured";
+  static const DESCRIPTION = "description";
 
   String _id;
   String _name;
@@ -19,10 +20,9 @@ class ProductModel{
   int _rates;
   String _restaurantId;
   String _restaurant;
-  double _price;
+  int _price;
   String _category;
-
-  var wishList;
+  String _description;
 
 
   //getters
@@ -34,8 +34,9 @@ class ProductModel{
   int get rates => _rates;
   String get restaurant => _restaurant;
   String get restaurantId => _restaurantId;
-  double get price => _price;
+  int get price => _price;
   String get category => _category;
+  String get description => _description;
 
 
   ProductModel.fromSnapshot(DocumentSnapshot snapshot){
@@ -48,6 +49,7 @@ class ProductModel{
     _restaurantId = snapshot.data()[RESTAURANT_ID];
     _price = snapshot.data()[PRICE];
     _category = snapshot.data()[CATEGORY];
+    _description = snapshot.data()[DESCRIPTION];
   }
 
 

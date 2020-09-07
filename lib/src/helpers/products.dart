@@ -3,19 +3,19 @@ import 'package:food_order_app/src/models/products.dart';
 
 class ProductServices {
   String collection = "products";
-  Firestore _firestore = FirebaseFirestore.instance;
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<List<ProductModel>> getProducts() async =>
-      _firestore.collection(collection).getDocuments().then((result) {
+      _firestore.collection(collection).get().then((result) {
         List<ProductModel> products = [];
-        for (DocumentSnapshot product in result.documents) {
+        for (DocumentSnapshot product in result.docs) {
           products.add(ProductModel.fromSnapshot(product));
         }
         return products;
       });
 
   void likeOrDislikeProduct({String id, List<String> userLikes}){
-    _firestore.collection(collection).document(id).updateData({
+    _firestore.collection(collection).doc(id).update({
       "userLikes": userLikes
     });
   }
@@ -24,10 +24,10 @@ class ProductServices {
       _firestore
           .collection(collection)
           .where("restaurantId", isEqualTo: id)
-          .getDocuments()
+          .get()
           .then((result) {
         List<ProductModel> products = [];
-        for (DocumentSnapshot product in result.documents) {
+        for (DocumentSnapshot product in result.docs) {
           products.add(ProductModel.fromSnapshot(product));
         }
         return products;
@@ -37,10 +37,10 @@ class ProductServices {
       _firestore
           .collection(collection)
           .where("category", isEqualTo: category)
-          .getDocuments()
+          .get()
           .then((result) {
         List<ProductModel> products = [];
-        for (DocumentSnapshot product in result.documents) {
+        for (DocumentSnapshot product in result.docs) {
           products.add(ProductModel.fromSnapshot(product));
         }
         return products;
@@ -54,10 +54,10 @@ class ProductServices {
         .orderBy("name")
         .startAt([searchKey])
         .endAt([searchKey + '\uf8ff'])
-        .getDocuments()
+        .get()
         .then((result) {
       List<ProductModel> products = [];
-      for (DocumentSnapshot product in result.documents) {
+      for (DocumentSnapshot product in result.docs) {
         products.add(ProductModel.fromSnapshot(product));
       }
       return products;

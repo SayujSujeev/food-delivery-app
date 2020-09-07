@@ -4,8 +4,11 @@ import 'package:flutter/rendering.dart';
 import 'package:food_order_app/src/helpers/screen_navigation.dart';
 import 'package:food_order_app/src/helpers/style.dart';
 import 'package:food_order_app/src/providers/category.dart';
+import 'package:food_order_app/src/providers/products.dart';
 import 'package:food_order_app/src/providers/restaurant.dart';
 import 'package:food_order_app/src/providers/user.dart';
+import 'package:food_order_app/src/screens/category.dart';
+import 'package:food_order_app/src/screens/restaurant.dart';
 import 'package:food_order_app/src/widgets/categories.dart';
 import 'package:food_order_app/src/widgets/custom_text.dart';
 import 'package:food_order_app/src/widgets/featured_products.dart';
@@ -244,4 +247,3 @@ class _HomeState extends State<Home> {
     );
   }
 }
-

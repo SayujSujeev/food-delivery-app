@@ -9,9 +9,9 @@ class RestaurantModel{
   static const IMAGE = "image";
   static const POPULAR = "popular";
 
-  int _id;
+  String _id;
   String _name;
-  double _avgPrice;
+  int _avgPrice;
   double _rating;
   String _image;
   bool _popular;
@@ -19,9 +19,9 @@ class RestaurantModel{
 
   //getters
 
-  int get id => _id;
+  String get id => _id;
   String get name => _name;
-  double get avgPrice => _avgPrice;
+  int get avgPrice => _avgPrice;
   double get rating => _rating;
   String get image => _image;
   bool get popular => _popular;
