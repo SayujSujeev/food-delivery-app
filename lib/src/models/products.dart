@@ -1,10 +1,54 @@
-class Product{
-  final String name;
-  final String image;
-  final double rating;
-  final double price;
-  final String vendor;
-  final bool wishList;
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-  Product({this.name, this.image, this.rating, this.price, this.vendor, this.wishList});
+class ProductModel{
+  static const ID = "id";
+  static const NAME = "name";
+  static const RATING = "rating";
+  static const RATES = "rates";
+  static const IMAGE = "image";
+  static const PRICE = "price";
+  static const RESTAURANT_ID = "restaurantId";
+  static const RESTAURANT = "restaurant";
+  static const CATEGORY = "category";
+  static const FEATURED = "featured";
+
+  String _id;
+  String _name;
+  double _rating;
+  String _image;
+  int _rates;
+  String _restaurantId;
+  String _restaurant;
+  double _price;
+  String _category;
+
+  var wishList;
+
+
+  //getters
+
+  String get id => _id;
+  String get name => _name;
+  double get rating => _rating;
+  String get image => _image;
+  int get rates => _rates;
+  String get restaurant => _restaurant;
+  String get restaurantId => _restaurantId;
+  double get price => _price;
+  String get category => _category;
+
+
+  ProductModel.fromSnapshot(DocumentSnapshot snapshot){
+    _id = snapshot.data()[ID];
+    _name = snapshot.data()[NAME];
+    _rating = snapshot.data()[RATING];
+    _image = snapshot.data()[IMAGE];
+    _rates = snapshot.data()[RATES];
+    _restaurant = snapshot.data()[RESTAURANT];
+    _restaurantId = snapshot.data()[RESTAURANT_ID];
+    _price = snapshot.data()[PRICE];
+    _category = snapshot.data()[CATEGORY];
+  }
+
+
 }

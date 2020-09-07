@@ -4,19 +4,13 @@ import 'package:food_order_app/src/helpers/style.dart';
 import 'package:food_order_app/src/models/products.dart';
 import 'package:food_order_app/src/widgets/custom_text.dart';
 
-class ShopingBag extends StatefulWidget {
+class ShoppingBag extends StatefulWidget {
   @override
-  _ShopingBagState createState() => _ShopingBagState();
+  _ShoppingBagState createState() => _ShoppingBagState();
 }
 
-class _ShopingBagState extends State<ShopingBag> {
-  Product product = Product(
-      name: "Salad",
-      price: 200,
-      rating: 4.2,
-      vendor: "GoodFoods",
-      wishList: true,
-      image: "1.jpg");
+class _ShoppingBagState extends State<ShoppingBag> {
+
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +23,9 @@ class _ShopingBagState extends State<ShopingBag> {
               Icons.arrow_back_ios,
               color: black,
             ),
-            onPressed: null,
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
           backgroundColor: white,
           elevation: 0,
@@ -81,47 +77,47 @@ class _ShopingBagState extends State<ShopingBag> {
         backgroundColor: white,
         body: ListView(
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Container(
-                height: 120,
-                decoration: BoxDecoration(color: white, boxShadow: [
-                  BoxShadow(
-                      color: Colors.red[100],
-                      offset: Offset(3, 7),
-                      blurRadius: 30)
-                ]),
-                child: Row(
-                  children: <Widget>[
-                    Image.asset(
-                      "images/${product.image}",
-                      height: 120,
-                      width: 120,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        RichText(
-                          text: TextSpan(children: [
-                            TextSpan(
-                                text: product.name + "\n",
-                                style: TextStyle(color: black, fontSize: 20)),
-                            TextSpan(
-                                text: "Rs." + product.price.toString() + "\n",
-                                style: TextStyle(color: black, fontSize: 16,fontWeight: FontWeight.bold)),
-                          ]),
-                        ),
-                        SizedBox(
-                          width: 130,
-                        ),
-
-                        IconButton(icon: Icon(Icons.delete),onPressed: null,)
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.all(12.0),
+            //   child: Container(
+            //     height: 120,
+            //     decoration: BoxDecoration(color: white, boxShadow: [
+            //       BoxShadow(
+            //           color: Colors.red[100],
+            //           offset: Offset(3, 7),
+            //           blurRadius: 30)
+            //     ]),
+            //     child: Row(
+            //       children: <Widget>[
+            //         Image.asset(
+            //           "images/${product.image}",
+            //           height: 120,
+            //           width: 120,
+            //         ),
+            //         Row(
+            //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //           children: <Widget>[
+            //             RichText(
+            //               text: TextSpan(children: [
+            //                 TextSpan(
+            //                     text: product.name + "\n",
+            //                     style: TextStyle(color: black, fontSize: 20)),
+            //                 TextSpan(
+            //                     text: "Rs." + product.amount.toString() + "\n",
+            //                     style: TextStyle(color: black, fontSize: 16,fontWeight: FontWeight.bold)),
+            //               ]),
+            //             ),
+            //             SizedBox(
+            //               width: 130,
+            //             ),
+            //
+            //             IconButton(icon: Icon(Icons.delete),onPressed: null,)
+            //           ],
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),
