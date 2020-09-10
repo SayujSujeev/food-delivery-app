@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:food_order_app/src/helpers/user.dart';
+import 'package:food_order_app/src/models/products.dart';
 import 'package:food_order_app/src/models/user.dart';
+import 'package:uuid/uuid.dart';
 
 
 
@@ -84,6 +86,10 @@ class UserProvider with ChangeNotifier{
     email.text = "";
   }
 
+  Future<void> relodUserModel()async{
+    _userModel = await _userServicse.getUserById(user.uid);
+    notifyListeners();
+  }
 
   Future<void> _onStateChanged(User firebaseUser) async{
     if(firebaseUser == null){
@@ -94,5 +100,55 @@ class UserProvider with ChangeNotifier{
       _userModel = await _userServicse.getUserById(user.uid);
     }
     notifyListeners();
+  }
+
+  Future <bool> addToCart({ProductModel product, int quantity}) async {
+   try{
+      var uuid = Uuid();
+      String cartItemId = uuid.v4();
+      List cart = _userModel.cart;
+      // bool itemExists = false;
+      Map cartItem = {
+        "id" : cartItemId,
+        "name" : product.name,
+        "image" : product.image,
+        "productId" : product.id,
+        "price" : product.price,
+        "quantity" : quantity,
+      };
+
+     //  for(Map item in cart){
+     //    if(item["productId"] == cartItem["productId"]){
+     // //     item["quantity"] = item["quantity"] + quantity;
+     //      itemExists = true;
+     //      break;
+     //    }
+     //  }
+     //
+     //  if(!itemExists){
+        _userServicse.addToCart(userId: _user.uid,cartItem: cartItem);
+      // }
+
+
+
+     return true;
+    }catch(e){
+      return false;
+    }
+
+  }
+
+  Future <bool> removeFromCart({Map cartItem}) async {
+    try{
+
+      _userServicse.removeFromCart(userId: _user.uid,cartItem: cartItem);
+
+
+
+      return true;
+    }catch(e){
+      return false;
+    }
+
   }
 }

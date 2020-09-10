@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:food_order_app/src/providers/app.dart';
 import 'package:food_order_app/src/providers/category.dart';
 import 'package:food_order_app/src/providers/products.dart';
 import 'package:food_order_app/src/providers/restaurant.dart';
@@ -13,6 +14,8 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MultiProvider(providers: [
+    ChangeNotifierProvider.value(value: AppProvider()),
+
     ChangeNotifierProvider.value(value: UserProvider.initialize()),
     ChangeNotifierProvider.value(value: CategoryProvider.initialize()),
     ChangeNotifierProvider.value(value: RestaurantProvider.initialize()),

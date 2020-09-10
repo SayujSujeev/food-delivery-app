@@ -1,8 +1,12 @@
-import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
+import 'package:food_order_app/src/helpers/screen_navigation.dart';
 import 'package:food_order_app/src/models/products.dart';
+import 'package:food_order_app/src/providers/app.dart';
+import 'package:food_order_app/src/providers/user.dart';
+import 'package:food_order_app/src/screens/cart.dart';
 import 'package:food_order_app/src/widgets/custom_text.dart';
-import 'package:transparent_image/transparent_image.dart';
+import 'package:food_order_app/src/widgets/loading.dart';
+import 'package:provider/provider.dart';
 
 
 import '../helpers/style.dart';
@@ -19,9 +23,16 @@ class Details extends StatefulWidget {
 
 class _DetailsState extends State<Details> {
   int quantity = 1;
+  final _key = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserProvider>(context);
+    final app = Provider.of<AppProvider>(context);
+
+
     return Scaffold(
+      key: _key,
       appBar: AppBar(
         iconTheme: IconThemeData(color: black),
         backgroundColor: white,
@@ -29,7 +40,9 @@ class _DetailsState extends State<Details> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.shopping_cart),
-            onPressed: () {},
+            onPressed: () {
+              changeScreen(context, CartScreen());
+            },
           ),
 
         ],
@@ -37,7 +50,7 @@ class _DetailsState extends State<Details> {
       ),
       backgroundColor: white,
       body: SafeArea(
-        child: Column(
+        child: app.isLoading ? Loading() : Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             CircleAvatar(
@@ -72,13 +85,24 @@ class _DetailsState extends State<Details> {
                 ),
 
                 GestureDetector(
-                  onTap: (){},
+                  onTap: () async{
+                    app.changeLoading();
+                    bool value = await user.addToCart(product: widget.product, quantity: quantity);
+                    if(value){
+                      _key.currentState.showSnackBar(
+                          SnackBar(content: Text("Added to cart"),)
+                      );
+                      user.relodUserModel();
+                      app.changeLoading();
+                      return;
+                    }
+                  },
                   child: Container(
                     decoration: BoxDecoration(
                         color: primary,
                         borderRadius: BorderRadius.circular(20)
                     ),
-                    child: Padding(
+                    child: app.isLoading? Loading() : Padding(
                       padding: const EdgeInsets.fromLTRB(28,12,28,12),
                       child: CustomText(text: "Add $quantity To Cart",color: white,size: 22,weight: FontWeight.w300,),
                     ),

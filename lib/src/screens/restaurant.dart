@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:food_order_app/src/helpers/screen_navigation.dart';
 import 'package:food_order_app/src/helpers/style.dart';
 import 'package:food_order_app/src/models/restaurants.dart';
 import 'package:food_order_app/src/providers/products.dart';
+import 'package:food_order_app/src/screens/details.dart';
 import 'package:food_order_app/src/widgets/custom_text.dart';
 import 'package:food_order_app/src/widgets/loading.dart';
 import 'package:food_order_app/src/widgets/product.dart';
@@ -82,7 +84,7 @@ class RestaurantScreen extends StatelessWidget {
                       bottom: 40,
                       child: Align(
                           alignment: Alignment.bottomCenter,
-                          child: CustomText(text: "Average Price: \$" + restaurantModel.avgPrice.toString(), color: white, size: 18, weight: FontWeight.w300,))),
+                          child: CustomText(text: "Average Price: Rs." + restaurantModel.avgPrice.toString(), color: white, size: 18, weight: FontWeight.w300,))),
 
                   // rating widget
                   Positioned.fill(
@@ -171,9 +173,15 @@ class RestaurantScreen extends StatelessWidget {
                 children: productProvider.productsByRestaurant
                     .map((item) => GestureDetector(
                   onTap: () {
-//                changeScreen(context, RestaurantScreen(restaurantModel: item,));
+                    changeScreen(
+                        context,
+                        Details(
+                          product: item,
+                        ));
                   },
-                  child: ProductWidget(),
+                  child: ProductWidget(
+                    product: item,
+                  ),
                 ))
                     .toList(),
               )
