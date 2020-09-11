@@ -11,6 +11,7 @@ import 'package:food_order_app/src/providers/user.dart';
 import 'package:food_order_app/src/screens/cart.dart';
 import 'package:food_order_app/src/screens/category.dart';
 import 'package:food_order_app/src/screens/login.dart';
+import 'package:food_order_app/src/screens/order.dart';
 import 'package:food_order_app/src/screens/product_search.dart';
 import 'package:food_order_app/src/screens/restaurant.dart';
 import 'package:food_order_app/src/screens/restaurant_search.dart';
@@ -99,7 +100,10 @@ class _HomeState extends State<Home> {
               title: CustomText(text: "Liked restaurants"),
             ),
             ListTile(
-              onTap: () {},
+              onTap: ()async {
+                await user.getOrders();
+                changeScreen(context, OrdersScreen());
+              },
               leading: Icon(Icons.bookmark_border),
               title: CustomText(text: "My orders"),
             ),
