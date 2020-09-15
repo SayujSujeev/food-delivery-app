@@ -1,3 +1,4 @@
+import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
 import 'package:food_order_app/src/helpers/screen_navigation.dart';
 import 'package:food_order_app/src/models/products.dart';
@@ -7,6 +8,7 @@ import 'package:food_order_app/src/screens/cart.dart';
 import 'package:food_order_app/src/widgets/custom_text.dart';
 import 'package:food_order_app/src/widgets/loading.dart';
 import 'package:provider/provider.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 
 import '../helpers/style.dart';
@@ -29,7 +31,6 @@ class _DetailsState extends State<Details> {
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context);
     final app = Provider.of<AppProvider>(context);
-
 
     return Scaffold(
       key: _key,
@@ -60,7 +61,7 @@ class _DetailsState extends State<Details> {
             SizedBox(height: 15,),
 
             CustomText(text: widget.product.name,size: 26,weight: FontWeight.bold),
-            CustomText(text: "Rs.${widget.product.price}",size: 20,weight: FontWeight.w400),
+            CustomText(text: "Rs.${widget.product.price }",size: 20,weight: FontWeight.w400),
             SizedBox(height: 10,),
 
             CustomText(text: "Description",size: 18,weight: FontWeight.w400),
@@ -85,24 +86,32 @@ class _DetailsState extends State<Details> {
                 ),
 
                 GestureDetector(
-                  onTap: () async{
+                  onTap: ()async{
                     app.changeLoading();
-                    bool value = await user.addToCart(product: widget.product, quantity: quantity);
+                    print("All set loading");
+
+                    bool value =  await user.addToCard(product: widget.product, quantity: quantity);
                     if(value){
+                      print("Item added to cart");
                       _key.currentState.showSnackBar(
-                          SnackBar(content: Text("Added to cart"),)
+                          SnackBar(content: Text("Added to Cart!"))
                       );
-                      user.relodUserModel();
+                      user.reloadUserModel();
                       app.changeLoading();
                       return;
+                    } else{
+                      print("Item NOT added to cart");
+
                     }
+                    print("lOADING SET TO FALSE");
+
                   },
                   child: Container(
                     decoration: BoxDecoration(
                         color: primary,
                         borderRadius: BorderRadius.circular(20)
                     ),
-                    child: app.isLoading? Loading() : Padding(
+                    child: app.isLoading ? Loading() : Padding(
                       padding: const EdgeInsets.fromLTRB(28,12,28,12),
                       child: CustomText(text: "Add $quantity To Cart",color: white,size: 22,weight: FontWeight.w300,),
                     ),

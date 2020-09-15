@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_order_app/src/helpers/order.dart';
 import 'package:food_order_app/src/helpers/style.dart';
+import 'package:food_order_app/src/models/cart_item.dart';
 import 'package:food_order_app/src/providers/app.dart';
 import 'package:food_order_app/src/providers/user.dart';
 import 'package:food_order_app/src/widgets/custom_text.dart';
@@ -67,7 +68,7 @@ class _CartScreenState extends State<CartScreen> {
                                 topLeft: Radius.circular(20),
                               ),
                               child: Image.network(
-                                user.userModel.cart[index]["image"],
+                                user.userModel.cart[index].image,
                                 height: 120,
                                 width: 120,
                                 fit: BoxFit.fill,
@@ -84,8 +85,7 @@ class _CartScreenState extends State<CartScreen> {
                                   RichText(
                                     text: TextSpan(children: [
                                       TextSpan(
-                                          text: user.userModel.cart[index]
-                                                  ["name"] +
+                                          text: user.userModel.cart[index] .name +
                                               "\n",
                                           style: TextStyle(
                                               color: black,
@@ -94,7 +94,7 @@ class _CartScreenState extends State<CartScreen> {
                                       TextSpan(
                                           text: "Rs" +
                                               user.userModel
-                                                  .cart[index]["price"]
+                                                  .cart[index].price
                                                   .toString() +
                                               "\n\n",
                                           style: TextStyle(
@@ -109,7 +109,7 @@ class _CartScreenState extends State<CartScreen> {
                                               fontWeight: FontWeight.w400)),
                                       TextSpan(
                                           text: user
-                                              .userModel.cart[index]["quantity"]
+                                              .userModel.cart[index].quantity
                                               .toString(),
                                           style: TextStyle(
                                               color: primary,
@@ -130,7 +130,7 @@ class _CartScreenState extends State<CartScreen> {
                                       bool value = await user.removeFromCart(
                                           cartItem: user.userModel.cart[index]);
                                       if (value) {
-                                        user.relodUserModel();
+                                        user.reloadUserModel();
                                         _key.currentState.showSnackBar(SnackBar(
                                           content: Text("Removed from cart"),
                                         ));
@@ -266,10 +266,10 @@ class _CartScreenState extends State<CartScreen> {
                                                   totalPrice: user
                                                       .userModel.totalCartPrice,
                                                   cart: user.userModel.cart);
-                                              for (Map cartItem in user.userModel.cart) {
+                                              for (CartItemModel cartItem in user.userModel.cart) {
                                                 bool value = await user.removeFromCart(cartItem: cartItem);
                                                 if (value) {
-                                                  user.relodUserModel();
+                                                  user.reloadUserModel();
                                                   _key.currentState
                                                       .showSnackBar(SnackBar(
                                                     content: Text(

@@ -1,56 +1,73 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ProductModel{
+class ProductModel {
   static const ID = "id";
   static const NAME = "name";
   static const RATING = "rating";
-  static const RATES = "rates";
   static const IMAGE = "image";
   static const PRICE = "price";
   static const RESTAURANT_ID = "restaurantId";
   static const RESTAURANT = "restaurant";
+  static const DESCRIPTION = "description";
   static const CATEGORY = "category";
   static const FEATURED = "featured";
-  static const DESCRIPTION = "description";
+  static const RATES = "rates";
+  static const USER_LIKES = "userLikes";
+
 
   String _id;
   String _name;
-  double _rating;
-  String _image;
-  int _rates;
   String _restaurantId;
   String _restaurant;
-  int _price;
   String _category;
+  String _image;
   String _description;
 
+  double _rating;
+  double _price;
+  int _rates;
 
-  //getters
+  bool _featured;
 
   String get id => _id;
+
   String get name => _name;
-  double get rating => _rating;
-  String get image => _image;
-  int get rates => _rates;
+
   String get restaurant => _restaurant;
+
   String get restaurantId => _restaurantId;
-  int get price => _price;
+
   String get category => _category;
+
   String get description => _description;
 
+  String get image => _image;
 
-  ProductModel.fromSnapshot(DocumentSnapshot snapshot){
+
+
+  double get rating => _rating;
+
+  double get price => _price;
+
+  bool get featured => _featured;
+
+  int get rates => _rates;
+
+  // public variable
+  bool liked = false;
+
+  ProductModel.fromSnapshot(DocumentSnapshot snapshot) {
     _id = snapshot.data()[ID];
-    _name = snapshot.data()[NAME];
-    _rating = snapshot.data()[RATING];
     _image = snapshot.data()[IMAGE];
-    _rates = snapshot.data()[RATES];
     _restaurant = snapshot.data()[RESTAURANT];
-    _restaurantId = snapshot.data()[RESTAURANT_ID];
+    _restaurantId = snapshot.data()[RESTAURANT_ID].toString();
+    _description = snapshot.data()[DESCRIPTION];
+    _id = snapshot.data()[ID];
+    _featured = snapshot.data()[FEATURED];
     _price = snapshot.data()[PRICE];
     _category = snapshot.data()[CATEGORY];
-    _description = snapshot.data()[DESCRIPTION];
+    _rating = snapshot.data()[RATING];
+    _rates = snapshot.data()[RATES];
+    _name = snapshot.data()[NAME];
   }
-
-
 }

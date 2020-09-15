@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:food_order_app/src/models/products.dart';
+import '../models/products.dart';
 
 class ProductServices {
   String collection = "products";

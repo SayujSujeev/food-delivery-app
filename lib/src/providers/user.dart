@@ -5,11 +5,11 @@ import 'package:flutter/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:food_order_app/src/helpers/order.dart';
 import 'package:food_order_app/src/helpers/user.dart';
+import 'package:food_order_app/src/models/cart_item.dart';
 import 'package:food_order_app/src/models/order.dart';
 import 'package:food_order_app/src/models/products.dart';
 import 'package:food_order_app/src/models/user.dart';
 import 'package:uuid/uuid.dart';
-
 
 
 enum Status{Uninitialized, Authenticated, Authenticating, Unauthenticated}
@@ -28,8 +28,7 @@ class UserProvider with ChangeNotifier{
   Status get status => _status;
   User get user => _user;
 
-  //public variables
-
+  // public variables
   List<OrderModel> orders = [];
 
   final formkey = GlobalKey<FormState>();
@@ -68,7 +67,7 @@ class UserProvider with ChangeNotifier{
           'email':email.text,
           'uid':result.user.uid,
           "likedFood": [],
-          "likedRestaurants": [],
+          "likedRestaurants": []
         });
       });
       return true;
@@ -93,10 +92,11 @@ class UserProvider with ChangeNotifier{
     email.text = "";
   }
 
-  Future<void> relodUserModel()async{
+  Future<void> reloadUserModel()async{
     _userModel = await _userServicse.getUserById(user.uid);
     notifyListeners();
   }
+
 
   Future<void> _onStateChanged(User firebaseUser) async{
     if(firebaseUser == null){
@@ -109,37 +109,37 @@ class UserProvider with ChangeNotifier{
     notifyListeners();
   }
 
-  Future <bool> addToCart({ProductModel product, int quantity}) async {
-   try{
+  Future<bool> addToCard({ProductModel product, int quantity})async{
+    print("THE PRODUC IS: ${product.toString()}");
+    print("THE qty IS: ${quantity.toString()}");
+
+    try{
       var uuid = Uuid();
       String cartItemId = uuid.v4();
       List cart = _userModel.cart;
-      // bool itemExists = false;
-      Map cartItem = {
-        "id" : cartItemId,
-        "name" : product.name,
-        "image" : product.image,
-        "productId" : product.id,
-        "price" : product.price,
-        "quantity" : quantity,
+//      bool itemExists = false;
+      Map cartItem ={
+        "id": cartItemId,
+        "name": product.name,
+        "image": product.image,
+        "restaurantId": product.restaurantId,
+        "totalRestaurantSale": product.price * quantity,
+        "productId": product.id,
+        "price": product.price,
+        "quantity": quantity
       };
 
-     //  for(Map item in cart){
-     //    if(item["productId"] == cartItem["productId"]){
-     // //     item["quantity"] = item["quantity"] + quantity;
-     //      itemExists = true;
-     //      break;
-     //    }
-     //  }
-     //
-     //  if(!itemExists){
-        _userServicse.addToCart(userId: _user.uid,cartItem: cartItem);
-      // }
+      CartItemModel item = CartItemModel.fromMap(cartItem);
+//      if(!itemExists){
+      print("CART ITEMS ARE: ${cart.toString()}");
+      _userServicse.addToCart(userId: _user.uid, cartItem: item);
+//      }
 
 
 
-     return true;
+      return true;
     }catch(e){
+      print("THE ERROR ${e.toString()}");
       return false;
     }
 
@@ -150,15 +150,14 @@ class UserProvider with ChangeNotifier{
     notifyListeners();
   }
 
-  Future <bool> removeFromCart({Map cartItem}) async {
+  Future<bool> removeFromCart({CartItemModel cartItem})async{
+    print("THE PRODUC IS: ${cartItem.toString()}");
+
     try{
-
-      _userServicse.removeFromCart(userId: _user.uid,cartItem: cartItem);
-
-
-
+      _userServicse.removeFromCart(userId: _user.uid, cartItem: cartItem);
       return true;
     }catch(e){
+      print("THE ERROR ${e.toString()}");
       return false;
     }
 

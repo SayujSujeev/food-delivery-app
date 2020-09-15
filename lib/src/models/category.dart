@@ -5,14 +5,14 @@ class CategoryModel{
   static const NAME = "name";
   static const IMAGE = "image";
 
-  int _id;
+  String _id;
   String _name;
   String _image;
 
 
   //getters
 
-  int get id => _id;
+  String get id => _id;
   String get name => _name;
   String get image => _image;
 
